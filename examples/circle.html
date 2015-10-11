@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <title>floodfill.js</title>
+    <script type="text/javascript" src="../floodfill.js"></script>
+</head>
+<body>
+    <h2>Before</h2>
+    <img id="image" src="circle.png" />
+    
+    <h2>After</h2>
+    <canvas id="canvas" width="128" height="128"></canvas> 
+    
+    <script>
+        // Load an image
+        var image = document.getElementById('image');
+        image.onload = function() {
+        
+            // Create a canvas with which we can edit an image
+            canvas = document.getElementById('canvas');
+            canvas.getContext('2d').drawImage(image, 0, 0);
+            
+            // Flood fill the image starting at point (50, 75) using the color red (255, 0, 0)
+            var color = { r: 255, g: 0, b: 0, a: 255 };
+            floodfill(50, 75, color, canvas.getContext('2d'), image.width, image.height, 128);
+        }
+    </script>
+</body>
+</html>
