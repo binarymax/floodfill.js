@@ -7,22 +7,40 @@
 <body>
     <h2>Before</h2>
     <img id="image" src="circle.png" />
-    
+
     <h2>After</h2>
-    <canvas id="canvas" width="128" height="128"></canvas> 
-    
+    <canvas id="canvas" width="128" height="128"></canvas>
+
+
+    <h2>Star Before</h2>
+    <img id="image_star" src="star.png" />
+
+    <h2>Fill partial background</h2>
+    <canvas id="canvas_star" width="128" height="128"></canvas>
+
     <script>
         // Load an image
         var image = document.getElementById('image');
+        var star = document.getElementById('image_star');
         image.onload = function() {
-        
+
             // Create a canvas with which we can edit an image
             canvas = document.getElementById('canvas');
             canvas.getContext('2d').drawImage(image, 0, 0);
-            
+
             // Flood fill the image starting at point (50, 75) using the color red (255, 0, 0)
             var color = { r: 255, g: 0, b: 0, a: 255 };
             floodfill(50, 75, color, canvas.getContext('2d'), image.width, image.height, 128);
+
+        }
+        star.onload = function() {
+            canvas = document.getElementById('canvas_star');
+            canvas.getContext('2d').drawImage(star, 0, 0);
+
+            // Flood fill the star starting at point (5, 5) using the color red (255, 0, 0)
+            var color = { r: 255, g: 0, b: 0, a: 255 };
+            floodfill(5, 5, color, canvas.getContext('2d'), star.width, star.height, 128);
+
         }
     </script>
 </body>
