@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+    <title>floodfill.js</title>
+    <script type="text/javascript" src="../floodfill.js"></script>
+</head>
+<body>
+    
+    <h2>Circle Before</h2>
+    <img id="image_circle" src="circle.png" />
+
+    <h2>Circle After</h2>
+    <canvas id="canvas_circle" width="128" height="128"></canvas>
+
+
+    <h2>Star Before</h2>
+    <img id="image_star" src="star.png" />
+
+    <h2>Fill partial background</h2>
+    <canvas id="canvas_star" width="128" height="128"></canvas>
+
+
+    <h2>Circle Before Clear</h2>
+    <img id="image_circle_clear" src="circle.png" />
+
+    <h2>Circle After Clear</h2>
+    <canvas id="canvas_circle_clear" width="128" height="128"></canvas>
+
+    <script>
+        
+        //Circle fill
+        var circle = document.getElementById('image_circle');
+        circle.onload = function() {
+
+            // Create a canvas with which we can edit an image
+            canvas = document.getElementById('canvas_circle');
+            canvas.getContext('2d').drawImage(circle, 0, 0);
+
+            // Flood fill the circle starting at point (50, 75) using the color red (255, 0, 0)
+            var color = { r: 255, g: 0, b: 0, a: 255 };
+            floodfill(50, 75, color, canvas.getContext('2d'), circle.width, circle.height, 0);
+
+        }
+        
+        //Star boundary fill
+        var star = document.getElementById('image_star');
+        star.onload = function() {
+
+            // Create a canvas with which we can edit an image
+            canvas = document.getElementById('canvas_star');
+            canvas.getContext('2d').drawImage(star, 0, 0);
+
+            // Flood fill the star starting at point (5, 5) using the color red (255, 0, 0)
+            var color = { r: 255, g: 0, b: 0, a: 255 };
+            floodfill(5, 5, color, canvas.getContext('2d'), star.width, star.height, 128);
+
+        }
+
+        //Circle Clear
+        var circle_clear = document.getElementById('image_circle_clear');
+        circle_clear.onload = function() {
+
+            // Create a canvas with which we can edit an image
+            canvas = document.getElementById('canvas_circle_clear');
+            canvas.getContext('2d').drawImage(circle_clear, 0, 0);
+
+            // Flood fill the circle starting at point (50, 75) using the color red (255, 0, 0)
+            var color = { r: 255, g: 0, b: 0, a: 255 };
+            floodfill(50, 75, color, canvas.getContext('2d'), circle.width, circle.height, 0);
+
+
+            // Flood fill the circle_clear starting at point (50, 75) using the color red (255, 0, 0)
+            var clear = { r: 0, g: 0, b: 0, a: 0 };
+            floodfill(50, 75, clear, canvas.getContext('2d'), circle_clear.width, circle_clear.height, 0);
+
+        }
+
+    </script>
+</body>
+</html>
