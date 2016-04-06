@@ -1,0 +1,21 @@
+{
+  "name": "floodfill",
+  "description": "Zero dependency canvas floodfill",
+  "main": "floodfill.js",
+  "authors": [
+    "Max Irwin"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "floodfill",
+    "canvas"
+  ],
+  "homepage": "https://github.com/binarymax/floodfill.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
