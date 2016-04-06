@@ -12,6 +12,9 @@ function floodfill(x,y,fillcolor,ctx,width,height,tolerance) {
 	var targetcolor = [data[i],data[i+1],data[i+2],data[i+3]];
 	var targettotal = data[i]+data[i+1]+data[i+2]+data[i+3];
 
+	//Maximum tolerance of 254
+	if (!isNaN(tolerance)) tolerance = Math.min(Math.abs(tolerance),254);
+
 	if(!pixelCompare(i,targetcolor,targettotal,fillcolor,data,length,tolerance)) { return false; }
 	Q.push(i);
 	while(Q.length) {
