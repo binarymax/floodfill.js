@@ -22,7 +22,7 @@ The fourth argument is the 2d context of the canvas object on which to execute t
 The fifth argument is a optional width of the fill boundaries, from the absolute left.
 
 ###Height(default canvas.height)
-The sixth argument is a optional width of the fill boundaries, from the absolute left.
+The sixth argument is a optional height of the fill boundaries, from the absolute top.
 
 ###Tolerance (default 0)
 The seventh argument is the optional tolerance, which allows for the algorithm to fill similar pixels.  The default is 0, which fills pixels exactly matching that of the starting x,y coordinate.
