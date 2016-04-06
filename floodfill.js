@@ -14,8 +14,8 @@ var floodfill = (function() {
 		var targetcolor = [data[i],data[i+1],data[i+2],data[i+3]];
 		var targettotal = data[i]+data[i+1]+data[i+2]+data[i+3];
 
-		//Maximum tolerance of 254
-		if (!isNaN(tolerance)) tolerance = Math.min(Math.abs(tolerance),254);
+		//Maximum tolerance of 254, Default to 0
+		tolerance = (!isNaN(tolerance)) ? Math.min(Math.abs(tolerance),254) : 0;
 
 		if(!pixelCompare(i,targetcolor,targettotal,fillcolor,data,length,tolerance)) { return false; }
 		Q.push(i);
@@ -68,7 +68,7 @@ var floodfill = (function() {
 	function pixelCompareAndSet(i,targetcolor,targettotal,fillcolor,data,length,tolerance) {
 		if(pixelCompare(i,targetcolor,targettotal,fillcolor,data,length,tolerance)) {
 			//fill the color
-			data[i] 	 = fillcolor.r;
+			data[i]   = fillcolor.r;
 			data[i+1] = fillcolor.g;
 			data[i+2] = fillcolor.b;
 			data[i+3] = fillcolor.a;
@@ -78,5 +78,5 @@ var floodfill = (function() {
 	}
 
 	return floodfill;
-	
- })();
+
+})();

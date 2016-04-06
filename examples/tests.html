@@ -46,7 +46,7 @@
 
             // Flood fill the circle starting at point (50, 75) using the color red (255, 0, 0)
             var color = { r: 255, g: 0, b: 0, a: 255 };
-            floodfill(50, 75, color, canvas.getContext('2d'), circle.width, circle.height, 0);
+            floodfill(50, 75, color, canvas.getContext('2d'), circle.width, circle.height, 128);
 
         }
         
@@ -60,7 +60,7 @@
 
             // Flood fill the star starting at point (5, 5) using the color red (255, 0, 0)
             var color = { r: 255, g: 0, b: 0, a: 255 };
-            floodfill(5, 5, color, canvas.getContext('2d'), star.width, star.height, 128);
+            floodfill(5, 5, color, canvas.getContext('2d'), star.width, star.height);
 
         }
 
@@ -74,12 +74,12 @@
 
             // Flood fill the circle starting at point (50, 75) using the color red (255, 0, 0)
             var color = { r: 255, g: 0, b: 0, a: 255 };
-            floodfill(50, 75, color, canvas.getContext('2d'), circle_clear.width, circle_clear.height, 0);
+            floodfill(50, 75, color, canvas.getContext('2d'), circle_clear.width, circle_clear.height);
 
 
             // Flood fill the circle_clear starting at point (50, 75) using the color red (255, 0, 0)
             var clear = { r: 0, g: 0, b: 0, a: 0 };
-            floodfill(50, 75, clear, canvas.getContext('2d'), circle_clear.width, circle_clear.height, 0);
+            floodfill(50, 75, clear, canvas.getContext('2d'), circle_clear.width, circle_clear.height);
 
         }
 
