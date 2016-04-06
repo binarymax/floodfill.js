@@ -34,7 +34,7 @@ function floodfill(x,y,fillcolor,ctx,width,height,tolerance) {
 
 function pixelCompare(i,targetcolor,targettotal,fillcolor,data,length,tolerance) {
 	if (i<0||i>=length) return false; //out of bounds
-	if (data[i+3]===0)  return true;  //surface is invisible
+	if (data[i+3]===0 && fillcolor.a>0) return true;  //surface is invisible and fill is visible
 
 	if (
 		(targetcolor[3] === fillcolor.a) &&
