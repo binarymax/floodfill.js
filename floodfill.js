@@ -12,32 +12,31 @@ var floodfill = (function() {
 		var i = (x+y*width)*4;
 		var e = i, w = i, me, mw, w2 = width*4;
 		var targetcolor = [data[i],data[i+1],data[i+2],data[i+3]];
-		var targettotal = data[i]+data[i+1]+data[i+2]+data[i+3];
 
 		//Maximum tolerance of 254, Default to 0
 		tolerance = (!isNaN(tolerance)) ? Math.min(Math.abs(tolerance),254) : 0;
 
-		if(!pixelCompare(i,targetcolor,targettotal,fillcolor,data,length,tolerance)) { return false; }
+		if(!pixelCompare(i,targetcolor,fillcolor,data,length,tolerance)) { return false; }
 		Q.push(i);
 		while(Q.length) {
 			i = Q.pop();
-			if(pixelCompareAndSet(i,targetcolor,targettotal,fillcolor,data,length,tolerance)) {
+			if(pixelCompareAndSet(i,targetcolor,fillcolor,data,length,tolerance)) {
 				e = i;
 				w = i;
 				mw = parseInt(i/w2)*w2; //left bound
-				me = mw+w2;	//right bound
-				while(mw<w && mw<(w-=4) && pixelCompareAndSet(w,targetcolor,targettotal,fillcolor,data,length,tolerance)); //go left until edge hit
-				while(me>e && me>(e+=4) && pixelCompareAndSet(e,targetcolor,targettotal,fillcolor,data,length,tolerance)); //go right until edge hit
+				me = mw+w2;             //right bound
+				while(mw<w && mw<(w-=4) && pixelCompareAndSet(w,targetcolor,fillcolor,data,length,tolerance)); //go left until edge hit
+				while(me>e && me>(e+=4) && pixelCompareAndSet(e,targetcolor,fillcolor,data,length,tolerance)); //go right until edge hit
 				for(var j=w;j<e;j+=4) {
-					if(j-w2>=0 		&& pixelCompare(j-w2,targetcolor,targettotal,fillcolor,data,length,tolerance)) Q.push(j-w2); //queue y-1
-					if(j+w2<length	&& pixelCompare(j+w2,targetcolor,targettotal,fillcolor,data,length,tolerance)) Q.push(j+w2); //queue y+1
+					if(j-w2>=0      && pixelCompare(j-w2,targetcolor,fillcolor,data,length,tolerance)) Q.push(j-w2); //queue y-1
+					if(j+w2<length	&& pixelCompare(j+w2,targetcolor,fillcolor,data,length,tolerance)) Q.push(j+w2); //queue y+1
 				}
 			}
 		}
 		ctx.putImageData(img,0,0);
 	}
 
-	function pixelCompare(i,targetcolor,targettotal,fillcolor,data,length,tolerance) {
+	function pixelCompare(i,targetcolor,fillcolor,data,length,tolerance) {
 		if (i<0||i>=length) return false; //out of bounds
 		if (data[i+3]===0 && fillcolor.a>0) return true;  //surface is invisible and fill is visible
 
@@ -65,8 +64,8 @@ var floodfill = (function() {
 		return false; //no match
 	}
 
-	function pixelCompareAndSet(i,targetcolor,targettotal,fillcolor,data,length,tolerance) {
-		if(pixelCompare(i,targetcolor,targettotal,fillcolor,data,length,tolerance)) {
+	function pixelCompareAndSet(i,targetcolor,fillcolor,data,length,tolerance) {
+		if(pixelCompare(i,targetcolor,fillcolor,data,length,tolerance)) {
 			//fill the color
 			data[i]   = fillcolor.r;
 			data[i+1] = fillcolor.g;
