@@ -2,39 +2,64 @@
 <html>
 <head>
     <title>floodfill.js</title>
-    <script type="text/javascript" src="../floodfill.js"></script>
+    <style>
+        .border {border:1px solid #ccc;}
+        td {width:400px;border-bottom:1px solid #eee;border-top:1px solid #eee;}
+    </style>
 </head>
 <body>
     
-    <h2>Circle Before</h2>
-    <img id="image_circle" src="circle.png" />
+    <table>
+        <tr>
+            <td>
+                <h2>Circle Before</h2>
+                <img id="image_circle" src="circle.png" class="border" />
+            </td><td>
+                <h2>Circle After</h2>
+                <canvas id="canvas_circle" width="128" height="128" class="border"></canvas>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>Star Before</h2>
+                <img id="image_star" src="star.png" class="border" />
+            </td><td>
+                <h2>Fill partial background</h2>
+                <canvas id="canvas_star" width="128" height="128" class="border"></canvas>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>Circle Before Clear</h2>
+                <img id="image_circle_clear" src="circle.png" class="border" />
+            </td><td>
+                <h2>Circle After Clear</h2>
+                <canvas id="canvas_circle_clear" width="128" height="128" class="border"></canvas>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>Circle Before Tolerance</h2>
+                <img id="image_circle_tolerance" src="circle.png" class="border" />
+            </td><td>
+                <h2>Circle After Tolerance</h2>
+                <canvas id="canvas_circle_tolerance" width="128" height="128" class="border"></canvas>
+            </td>
+        </tr>
+    </table>
 
-    <h2>Circle After</h2>
-    <canvas id="canvas_circle" width="128" height="128"></canvas>
+    <script type="text/javascript">
+        <!--
+        (function(){
+            var min = window.location.search.indexOf("min=1")>=0;
+            var scr = min?'../floodfill.min.js':'../floodfill.js';
+            var str = '<script type="text/javascript" src="'+scr+'"></script>';
+            document.write(str);
+        })();
+        //-->
+    </script>
 
-
-    <h2>Star Before</h2>
-    <img id="image_star" src="star.png" />
-
-    <h2>Fill partial background</h2>
-    <canvas id="canvas_star" width="128" height="128"></canvas>
-
-
-    <h2>Circle Before Clear</h2>
-    <img id="image_circle_clear" src="circle.png" />
-
-    <h2>Circle After Clear</h2>
-    <canvas id="canvas_circle_clear" width="128" height="128"></canvas>
-
-
-    <h2>Circle Before Maximum Tolerance</h2>
-    <img id="image_circle_tolerance" src="circle.png" />
-
-    <h2>Circle After Maximum Tolerance</h2>
-    <canvas id="canvas_circle_tolerance" width="128" height="128"></canvas>
-
-
-    <script>
+    <script type="text/javascript">
         
         //Circle fill
         var circle = document.getElementById('image_circle');
