@@ -5,6 +5,14 @@ var floodfill = (function() {
 
 	//Floodfill functions
 	function floodfill(x,y,fillcolor,ctx,width,height,tolerance) {
+
+		//Defaults and type checks for width and height
+		width = (!isNaN(width)&&width) ? Math.min(Math.abs(width),ctx.canvas.width) : ctx.canvas.width;
+		height = (!isNaN(height)&&height) ? Math.min(Math.abs(height),ctx.canvas.height) : ctx.canvas.height;
+
+		//Maximum tolerance of 254, Default to 0
+		tolerance = (!isNaN(tolerance)) ? Math.min(Math.abs(tolerance),254) : 0;
+
 		var img = ctx.getImageData(0,0,width,height);
 		var data = img.data;
 		var length = data.length;
@@ -12,9 +20,6 @@ var floodfill = (function() {
 		var i = (x+y*width)*4;
 		var e = i, w = i, me, mw, w2 = width*4;
 		var targetcolor = [data[i],data[i+1],data[i+2],data[i+3]];
-
-		//Maximum tolerance of 254, Default to 0
-		tolerance = (!isNaN(tolerance)) ? Math.min(Math.abs(tolerance),254) : 0;
 
 		if(!pixelCompare(i,targetcolor,fillcolor,data,length,tolerance)) { return false; }
 		Q.push(i);

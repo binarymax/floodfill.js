@@ -21,6 +21,15 @@
         </tr>
         <tr>
             <td>
+                <h2>Circle Spec Before</h2>
+                <img id="image_circle_spec" src="circle.png" class="border" />
+            </td><td>
+                <h2>Circle Spec After</h2>
+                <canvas id="canvas_circle_spec" width="128" height="128" class="border"></canvas>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <h2>Star Before</h2>
                 <img id="image_star" src="star.png" class="border" />
             </td><td>
@@ -61,7 +70,7 @@
 
     <script type="text/javascript">
         
-        //Circle fill
+        //Circle default fill
         var circle = document.getElementById('image_circle');
         circle.onload = function() {
 
@@ -71,10 +80,25 @@
 
             // Flood fill the circle starting at point (50, 75) using the color red (255, 0, 0)
             var color = { r: 255, g: 0, b: 0, a: 255 };
-            floodfill(50, 75, color, canvas.getContext('2d'), circle.width, circle.height, 128);
+            floodfill(50, 75, color, canvas.getContext('2d'));
 
         }
         
+        //Circle spec fill
+        var circle = document.getElementById('image_circle_spec');
+        circle.onload = function() {
+
+            // Create a canvas with which we can edit an image
+            var canvas = document.getElementById('canvas_circle_spec');
+            canvas.getContext('2d').drawImage(circle, 0, 0);
+
+            // Flood fill the circle starting at point (50, 75) using the color red (255, 0, 0)
+            var color = { r: 255, g: 0, b: 0, a: 255 };
+            floodfill(50, 75, color, canvas.getContext('2d'), circle.width, circle.height, 128);
+
+        }
+
+
         //Star boundary fill
         var star = document.getElementById('image_star');
         star.onload = function() {
@@ -99,12 +123,12 @@
 
             // Flood fill the circle starting at point (50, 75) using the color red (255, 0, 0)
             var color = { r: 255, g: 0, b: 0, a: 255 };
-            floodfill(50, 75, color, canvas.getContext('2d'), circle_clear.width, circle_clear.height);
+            floodfill(50, 75, color, canvas.getContext('2d'));
 
 
             // Flood fill the circle_clear starting at point (50, 75) using the color red (255, 0, 0)
             var clear = { r: 0, g: 0, b: 0, a: 0 };
-            floodfill(50, 75, clear, canvas.getContext('2d'), circle_clear.width, circle_clear.height);
+            floodfill(50, 75, clear, canvas.getContext('2d'));
 
         }
 
