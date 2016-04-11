@@ -1,6 +1,6 @@
 {
   "name": "floodfill",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Zero dependency canvas floodfill",
   "main": "floodfill.js",
   "directories": {
