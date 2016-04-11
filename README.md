@@ -18,7 +18,7 @@ When calling the method above with a coordinate, color, context, boundaries, and
 
 The method signature is:
 
-```function floodfill(int x, int y, rgba color, context2d image, uint max-left, uint max-top, byte tolerance)```
+```function floodfill(uint x, uint y, rgba color, CanvasRenderingContext2d context, uint right, uint bottom, byte tolerance)```
 
 
 ###Coordinates (required)
@@ -32,14 +32,14 @@ where BYTE is a number from 0 to 255.
 ###Context (required)
 The fourth argument is the 2d context of the canvas object on which to execute the fill
 
-###Width (default canvas.width)
-The fifth argument is a optional width of the fill boundaries, from the absolute left.
+###Right (default context.canvas.width)
+The fifth argument is an optional width of the fill boundaries, from the absolute left.
 
-###Height(default canvas.height)
-The sixth argument is a optional height of the fill boundaries, from the absolute top.
+###Bottom (default context.canvas.height)
+The sixth argument is an optional height of the fill boundaries, from the absolute top.
 
 ###Tolerance (default 0)
-The seventh argument is the optional tolerance, which allows for the algorithm to fill similar pixels.  The default is 0, which fills pixels exactly matching that of the starting x,y coordinate.
+The seventh argument is an optional tolerance, which allows for the algorithm to fill similar pixels.  The default is 0, which fills pixels exactly matching that of the starting x,y coordinate.  The maximum of 254 bleeds the fill over all other pixels.
 
 Tip: A typical fill tolerance for anti-alias is 128
 
