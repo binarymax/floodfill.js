@@ -1,20 +1,12 @@
 var floodfill = (function() {
 
 	//MIT License
-	//Author: Max Irwin, 2011,2016
+	//Author: Max Irwin
+	//Copyright 2011, 2015, 2016
 
 	//Floodfill functions
-	function floodfill(x,y,fillcolor,ctx,width,height,tolerance) {
+	function floodfill(data,x,y,fillcolor,tolerance,width,height) {
 
-		//Defaults and type checks for width and height
-		width = (!isNaN(width)&&width) ? Math.min(Math.abs(width),ctx.canvas.width) : ctx.canvas.width;
-		height = (!isNaN(height)&&height) ? Math.min(Math.abs(height),ctx.canvas.height) : ctx.canvas.height;
-
-		//Maximum tolerance of 254, Default to 0
-		tolerance = (!isNaN(tolerance)) ? Math.min(Math.abs(tolerance),254) : 0;
-
-		var img = ctx.getImageData(0,0,width,height);
-		var data = img.data;
 		var length = data.length;
 		var Q = [];
 		var i = (x+y*width)*4;
@@ -38,7 +30,7 @@ var floodfill = (function() {
 				}
 			}
 		}
-		ctx.putImageData(img,0,0);
+		return data;
 	}
 
 	function pixelCompare(i,targetcolor,fillcolor,data,length,tolerance) {
@@ -81,6 +73,43 @@ var floodfill = (function() {
 		return false;
 	}
 
-	return floodfill;
+	function fillUint8ClampedArray(data,x,y,color,tolerance,width,height) {
+		if (!data instanceof Uint8ClampedArray) throw new Error("data must be an instance of Uint8ClampedArray");
+		if (isNaN(width)) throw new Error("argument 'width' must be a positive integer");
+		if (isNaN(height)) throw new Error("argument 'height' must be a positive integer");
+		if (isNaN(x)) throw new Error("argument 'x' must be a positive integer");
+		if (isNaN(y)) throw new Error("argument 'y' must be a positive integer");
+		var length = data.length;
+
+		//Maximum tolerance of 254, Default to 0
+		tolerance = (!isNaN(tolerance)) ? Math.min(Math.abs(tolerance),254) : 0;
+
+		return floodfill(data,x,y,color,tolerance,width,height);
+	}
+
+	function fillContext(x,y,color,tolerance,left,top,right,bottom) {
+		var ctx  = this;
+		
+		//Defaults and type checks for image boundaries
+		left     = (isNaN(left)) ? 0 : left;
+		top      = (isNaN(top)) ? 0 : top;
+		right    = (!isNaN(right)&&right) ? Math.min(Math.abs(right),ctx.canvas.width) : ctx.canvas.width;
+		bottom   = (!isNaN(bottom)&&bottom) ? Math.min(Math.abs(bottom),ctx.canvas.height) : ctx.canvas.height;
+
+		var image = ctx.getImageData(left,top,right,bottom);
+		
+		var data = image.data;
+		var width = image.width;
+		var height = image.height;
+		
+		if(width>0 && height>0) {
+			fillUint8ClampedArray(data,x,y,color,tolerance,width,height);
+			ctx.putImageData(image,0,0);
+		}
+	}
+
+	CanvasRenderingContext2D.prototype.floodfill = fillContext;
+
+	return fillUint8ClampedArray;
 
 })();

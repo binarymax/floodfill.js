@@ -76,11 +76,12 @@
 
             // Create a canvas with which we can edit an image
             var canvas = document.getElementById('canvas_circle');
-            canvas.getContext('2d').drawImage(circle, 0, 0);
+            var context = canvas.getContext('2d');
+            context.drawImage(circle, 0, 0);
 
             // Flood fill the circle starting at point (50, 75) using the color red (255, 0, 0)
             var color = { r: 255, g: 0, b: 0, a: 255 };
-            floodfill(50, 75, color, canvas.getContext('2d'));
+            context.floodfill(50, 75, color);
 
         }
         
@@ -90,11 +91,12 @@
 
             // Create a canvas with which we can edit an image
             var canvas = document.getElementById('canvas_circle_spec');
-            canvas.getContext('2d').drawImage(circle, 0, 0);
+            var context = canvas.getContext('2d');
+            context.drawImage(circle, 0, 0);
 
             // Flood fill the circle starting at point (50, 75) using the color red (255, 0, 0)
             var color = { r: 255, g: 0, b: 0, a: 255 };
-            floodfill(50, 75, color, canvas.getContext('2d'), circle.width, circle.height, 128);
+            context.floodfill(50, 75, color, 128, 0, 0, circle.width, circle.height);
 
         }
 
@@ -105,11 +107,12 @@
 
             // Create a canvas with which we can edit an image
             var canvas = document.getElementById('canvas_star');
-            canvas.getContext('2d').drawImage(star, 0, 0);
+            var context = canvas.getContext('2d');
+            context.drawImage(star, 0, 0);
 
             // Flood fill the star starting at point (5, 5) using the color red (255, 0, 0)
             var color = { r: 255, g: 0, b: 0, a: 255 };
-            floodfill(5, 5, color, canvas.getContext('2d'), star.width, star.height);
+            context.floodfill(5, 5, color, 0, 0, 0, star.width, star.height);
 
         }
 
@@ -119,16 +122,17 @@
 
             // Create a canvas with which we can edit an image
             var canvas = document.getElementById('canvas_circle_clear');
-            canvas.getContext('2d').drawImage(circle_clear, 0, 0);
+            var context = canvas.getContext('2d');
+            context.drawImage(circle_clear, 0, 0);
 
             // Flood fill the circle starting at point (50, 75) using the color red (255, 0, 0)
             var color = { r: 255, g: 0, b: 0, a: 255 };
-            floodfill(50, 75, color, canvas.getContext('2d'));
+            context.floodfill(50, 75, color);
 
 
             // Flood fill the circle_clear starting at point (50, 75) using the color red (255, 0, 0)
             var clear = { r: 0, g: 0, b: 0, a: 0 };
-            floodfill(50, 75, clear, canvas.getContext('2d'));
+            context.floodfill(50, 75, clear);
 
         }
 
@@ -138,25 +142,24 @@
 
             // Create a canvas with which we can edit an image
             var canvas = document.getElementById('canvas_circle_tolerance');
-            canvas.getContext('2d').drawImage(circle_tolerance, 0, 0);
-
             var context = canvas.getContext('2d');
+            context.drawImage(circle_tolerance, 0, 0);
            
             // Test various tolerance levels 
             var color1 = { r: 255, g: 0, b: 0, a: 255 };
-            floodfill(50, 75, color1, context, circle_tolerance.width, circle_tolerance.height, 255);
+            context.floodfill(50, 75, color1, 255, 0, 0, circle_tolerance.width, circle_tolerance.height);
             
             var color2 = { r: 0, g: 255, b: 0, a: 255 };
-            floodfill(50, 75, color2, context, circle_tolerance.width, circle_tolerance.height, 0);
+            context.floodfill(50, 75, color2, 0, 0, 0, circle_tolerance.width, circle_tolerance.height);
             
             var color3 = { r: 0, g: 0, b: 255, a: 255 };
-            floodfill(50, 75, color3, context, circle_tolerance.width, circle_tolerance.height, -999);
+            context.floodfill(50, 75, color3, -999, 0, 0, circle_tolerance.width, circle_tolerance.height);
             
             var color4 = { r: 255, g: 255, b: 0, a: 255 };
-            floodfill(50, 75, color4, context, circle_tolerance.width, circle_tolerance.height, null);
+            context.floodfill(50, 75, color4, null, 0, 0, circle_tolerance.width, circle_tolerance.height);
             
             var color5 = { r: 255, g: 255, b: 255, a: 255 };
-            floodfill(50, 75, color5, context, circle_tolerance.width, circle_tolerance.height, '123');
+            context.floodfill(50, 75, color5, '123', 0, 0, circle_tolerance.width, circle_tolerance.height);
 
         }
         
