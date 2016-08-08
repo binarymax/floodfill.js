@@ -22,10 +22,10 @@
         </tr>
         <tr>
             <td>
-                <h2>Circle Spec Before</h2>
+                <h2>Circle Anti-alias Before</h2>
                 <img id="image_circle_spec" src="circle.png" class="border" />
             </td><td>
-                <h2>Circle Spec After</h2>
+                <h2>Circle Anti-alias After</h2>
                 <canvas id="canvas_circle_spec" width="128" height="128" class="border"></canvas>
             </td>
         </tr>
@@ -34,8 +34,17 @@
                 <h2>Star Before</h2>
                 <img id="image_star" src="star.png" class="border" />
             </td><td>
-                <h2>Fill partial background</h2>
+                <h2>Star After</h2>
                 <canvas id="canvas_star" width="128" height="128" class="border"></canvas>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>Star Crop Before</h2>
+                <img id="image_star_crop" src="star.png" class="border" />
+            </td><td>
+                <h2>Star Crop After</h2>
+                <canvas id="canvas_star_crop" width="128" height="128" class="border"></canvas>
             </td>
         </tr>
         <tr>
@@ -54,6 +63,15 @@
             </td><td>
                 <h2>Circle After Tolerance</h2>
                 <canvas id="canvas_circle_tolerance" width="128" height="128" class="border"></canvas>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>Circle ArrayBuffer Before</h2>
+                <img id="image_circle_array" src="circle.png" class="border" />
+            </td><td>
+                <h2>Circle ArrayBuffer After</h2>
+                <canvas id="canvas_circle_array" width="128" height="128" class="border"></canvas>
             </td>
         </tr>
     </table>
@@ -120,6 +138,21 @@
 
         }
 
+        //Star boundary fill cropped
+        var star = document.getElementById('image_star_crop');
+        star.onload = function() {
+
+            // Create a canvas with which we can edit an image
+            var canvas = document.getElementById('canvas_star_crop');
+            var context = canvas.getContext('2d');
+            context.drawImage(star, 0, 0);
+
+            // Flood fill the star starting at point (5, 5) using the color red (255, 0, 0)
+            context.fillStyle = "rgba(255,0,0,1)";
+            context.fillFlood(30, 30, 128, 20, 20, 80,80);
+
+        }
+
         //Circle Clear
         var circle_clear = document.getElementById('image_circle_clear');
         circle_clear.onload = function() {
@@ -134,7 +167,7 @@
             context.fillFlood(50, 75);
 
             // Flood fill the circle_clear starting at point (50, 75) using the color red (255, 0, 0)
-            context.fillStyle = "rgba(0,0,0,0)";
+            context.fillStyle = "rgba(1,0,0,0)";
             context.fillFlood(50, 75);
 
         }
@@ -166,6 +199,21 @@
 
             context.fillStyle = "#ffffff";
             context.fillFlood(50, 75, '123', 0, 0, circle_tolerance.width, circle_tolerance.height);            
+
+        }
+
+        //Circle Clear
+        var circle_array = document.getElementById('image_circle_array');
+        circle_tolerance.onload = function() {
+
+            // Create a canvas with which we can edit an image
+            var canvas = document.getElementById('canvas_circle_array');
+            var context = canvas.getContext('2d');
+            context.drawImage(circle_tolerance, 0, 0);
+
+            var image = context.getImageData(0,0,circle_array.width,circle_array.height);
+            var result = floodfill(image.data,50,50,{r:255,g:255,b:0,a:255},128,image.width,image.height);
+            context.putImageData(image,0,0);
 
         }
 

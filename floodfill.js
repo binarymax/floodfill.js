@@ -3,7 +3,7 @@ var floodfill = (function() {
 	//Copyright(c) Max Irwin - 2011, 2015, 2016
 	//MIT License
 
-	function floodfill(data,x,y,fillcolor,tolerance,width,height,left,top,right,bottom) {
+	function floodfill(data,x,y,fillcolor,tolerance,width,height) {
 
 		var length = data.length;
 		var Q = [];
@@ -72,7 +72,7 @@ var floodfill = (function() {
 		return false;
 	};
 
-	function fillUint8ClampedArray(data,x,y,color,tolerance,width,height,left,top,right,bottom) {
+	function fillUint8ClampedArray(data,x,y,color,tolerance,width,height) {
 		if (!data instanceof Uint8ClampedArray) throw new Error("data must be an instance of Uint8ClampedArray");
 		if (isNaN(width)  || width<1)  throw new Error("argument 'width' must be a positive integer");
 		if (isNaN(height) || height<1) throw new Error("argument 'height' must be a positive integer");
@@ -83,12 +83,7 @@ var floodfill = (function() {
 		//Maximum tolerance of 254, Default to 0
 		tolerance = (!isNaN(tolerance)) ? Math.min(Math.abs(tolerance),254) : 0;
 
-		left = left||0;
-		top = top||0;
-		right = right||width;
-		bottom = bottom||height;
-
-		return floodfill(data,x,y,color,tolerance,width,height,left,top,right,bottom);
+		return floodfill(data,x,y,color,tolerance,width,height);
 	};
 
 	var getComputedColor = function(c) {
@@ -132,8 +127,8 @@ var floodfill = (function() {
 		var height = image.height;
 		
 		if(width>0 && height>0) {
-			fillUint8ClampedArray(data,x,y,color,tolerance,width,height,left,top,right,bottom);
-			ctx.putImageData(image,0,0);
+			fillUint8ClampedArray(data,x,y,color,tolerance,width,height);
+			ctx.putImageData(image,left,top);
 		}
 	};
 
