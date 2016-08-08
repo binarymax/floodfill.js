@@ -88,7 +88,7 @@
     </script>
         //-->
 
-    <script type="text/javascript" src="../floodfill.js"></script>
+    <script type="text/javascript" src="../floodfill.min.js"></script>
 
     <script type="text/javascript">
         
@@ -109,8 +109,8 @@
         }
 
         //Circle spec fill
-        var circle = document.getElementById('image_circle_spec');
-        circle.onload = function() {
+        var circle_spec = document.getElementById('image_circle_spec');
+        circle_spec.onload = function() {
 
             // Create a canvas with which we can edit an image
             var canvas = document.getElementById('canvas_circle_spec');
@@ -139,8 +139,8 @@
         }
 
         //Star boundary fill cropped
-        var star = document.getElementById('image_star_crop');
-        star.onload = function() {
+        var star_crop = document.getElementById('image_star_crop');
+        star_crop.onload = function() {
 
             // Create a canvas with which we can edit an image
             var canvas = document.getElementById('canvas_star_crop');
@@ -204,7 +204,7 @@
 
         //Circle Clear
         var circle_array = document.getElementById('image_circle_array');
-        circle_tolerance.onload = function() {
+        circle_array.onload = function() {
 
             // Create a canvas with which we can edit an image
             var canvas = document.getElementById('canvas_circle_array');
