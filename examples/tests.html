@@ -74,6 +74,17 @@
                 <canvas id="canvas_circle_array" width="128" height="128" class="border"></canvas>
             </td>
         </tr>
+        <tr>
+            <td>
+                <h2>Circle Close Tolerance Before</h2>
+                <img id="image_circle_close" src="circle.png" class="border" />
+            </td><td>
+                <h2>Circle Close Tolerance After</h2>
+                <canvas id="canvas_circle_close" width="128" height="128" class="border"></canvas>
+            </td>
+        </tr>
+
+
     </table>
 
         <!--
@@ -216,6 +227,25 @@
             context.putImageData(image,0,0);
 
         }
+
+        //Circle Clear
+        var circle_close = document.getElementById('image_circle_close');
+        circle_close.onload = function() {
+
+            // Create a canvas with which we can edit an image
+            var canvas = document.getElementById('canvas_circle_close');
+            var context = canvas.getContext('2d');
+            context.drawImage(circle_close, 0, 0);
+           
+            // Test various tolerance levels 
+            context.fillStyle = "rgba(255,0,0,1)";
+            context.fillFlood(50.1, 75, 0, 0, 0, circle_close.width, circle_close.height);
+            
+            context.fillStyle = "rgba(254,0,0,1)";
+            context.fillFlood(50, 75.2, 1, 0, 0, circle_close.width, circle_close.height);
+            
+        }
+
 
     </script>
 </body>
