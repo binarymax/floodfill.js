@@ -37,10 +37,10 @@ var floodfill = (function() {
 		if (data[i+3]===0 && fillcolor.a>0) return true;  //surface is invisible and fill is visible
 
 		if (
-			(targetcolor[3] === fillcolor.a) &&
-			(targetcolor[0] === fillcolor.r) &&
-			(targetcolor[1] === fillcolor.g) &&
-			(targetcolor[2] === fillcolor.b)
+			Math.abs(targetcolor[3] - fillcolor.a)<=tolerance &&
+			Math.abs(targetcolor[0] - fillcolor.r)<=tolerance &&
+			Math.abs(targetcolor[1] - fillcolor.g)<=tolerance &&
+			Math.abs(targetcolor[2] - fillcolor.b)<=tolerance
 		) return false; //target is same as fill
 
 		if (
@@ -80,10 +80,16 @@ var floodfill = (function() {
 		if (isNaN(y) || y<0) throw new Error("argument 'y' must be a positive integer");
 		if (width*height*4!==data.length) throw new Error("width and height do not fit Uint8ClampedArray dimensions");
 
-		//Maximum tolerance of 254, Default to 0
-		tolerance = (!isNaN(tolerance)) ? Math.min(Math.abs(tolerance),254) : 0;
+		var xi = Math.floor(x);
+		var yi = Math.floor(y);
 
-		return floodfill(data,x,y,color,tolerance,width,height);
+		if (xi!==x) console.warn("x truncated from",x,"to",xi);
+		if (yi!==y) console.warn("y truncated from",y,"to",yi);
+
+		//Maximum tolerance of 254, Default to 0
+		tolerance = (!isNaN(tolerance)) ? Math.min(Math.abs(Math.round(tolerance)),254) : 0;
+
+		return floodfill(data,xi,yi,color,tolerance,width,height);
 	};
 
 	var getComputedColor = function(c) {
