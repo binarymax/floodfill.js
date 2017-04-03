@@ -138,7 +138,7 @@ var floodfill = (function() {
 		}
 	};
 
-	if (typeof CanvasRenderingContext2D === 'function') {
+	if (typeof CanvasRenderingContext2D != 'undefined') {
 		CanvasRenderingContext2D.prototype.fillFlood = fillContext;
 	};
 
