@@ -84,6 +84,15 @@
             </td>
         </tr>
 
+        <tr>
+            <td>
+                <h2>Circle Bounds Bug Test Before</h2>
+                <img id="image_circle_bounds_bug" src="circle.png" class="border" />
+            </td><td>
+                <h2>Circle Bounds Bug Test After</h2>
+                <canvas id="canvas_circle_bounds_bug" width="128" height="128" class="border"></canvas>
+            </td>
+        </tr>
 
     </table>
 
@@ -246,6 +255,23 @@
             
         }
 
+
+        //Out-of-Bounds bug test
+        var circle_bounds_bug = document.getElementById('image_circle_close');
+        circle_bounds_bug.onload = function() {
+
+            // Create a canvas with which we can edit an image
+            var canvas = document.getElementById('canvas_circle_bounds_bug');
+            var context = canvas.getContext('2d');
+            context.drawImage(circle_bounds_bug, 0, 0);
+           
+            // Test lots of things
+            for(var i=0;i<200;i++) {
+                context.fillStyle = "rgba(255,"+i+",0,1)";
+                context.fillFlood(50, 75, i, 0, 0, circle_bounds_bug.width, circle_bounds_bug.height);
+            }
+            
+        }
 
     </script>
 </body>
