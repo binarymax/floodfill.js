@@ -23,7 +23,7 @@ var floodfill = (function() {
 				me = mw+w2;             //right bound
 				while(mw<w && mw<(w-=4) && pixelCompareAndSet(w,targetcolor,fillcolor,data,length,tolerance)); //go left until edge hit
 				while(me>e && me>(e+=4) && pixelCompareAndSet(e,targetcolor,fillcolor,data,length,tolerance)); //go right until edge hit
-				for(var j=w;j<e;j+=4) {
+				for(var j=w+4;j<e;j+=4) {
 					if(j-w2>=0     && pixelCompare(j-w2,targetcolor,fillcolor,data,length,tolerance)) Q.push(j-w2); //queue y-1
 					if(j+w2<length && pixelCompare(j+w2,targetcolor,fillcolor,data,length,tolerance)) Q.push(j+w2); //queue y+1
 				}
@@ -145,3 +145,4 @@ var floodfill = (function() {
 	return fillUint8ClampedArray;
 
 })();
+
